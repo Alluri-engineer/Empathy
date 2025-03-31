@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Theses of the Defense Reformation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #000000;
+            --light-bg: #f8f8f0;
+            --green-bg: #7CA97E;
+            --text-dark: #000000;
+            --text-light: #ffffff;
+            --accent-color: #FF4700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+            z-index: 1000;
+            height: 60px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header .logo {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header .actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            opacity: 0.8;
+            transition: opacity 0.2s, color 0.2s;
+        }
+        
+        .header button:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+            transition: opacity 0.2s, color 0.2s;
+        }
+        
+        .back-button:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        .section {
+            min-height: 100vh;
+            padding: 60px 0 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-inner {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 2rem 0;
+        }
+        
+        .section-indicator {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .black-section .dot {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .dot.active {
+            background-color: var(--text-dark);
+        }
+        
+        .black-section .dot.active {
+            background-color: var(--text-light);
+        }
+        
+        .section-title {
+            font-size: 5rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .horizontal-line {
+            width: 100%;
+            height: 1px;
+            background-color: var(--text-dark);
+            margin: 2rem 0;
+        }
+        
+        .section-content {
+            font-size: 1.2rem;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+        
+        .thesis {
+            margin-bottom: 2rem;
+            padding: 0 2rem 2rem;
+        }
+        
+        .thesis-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .thesis-number {
+            font-size: 18px;
+            color: var(--green-bg);
+            margin-right: 1rem;
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: 2px solid var(--green-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .green-section .thesis-number {
+            color: #000;
+            border-color: #000;
+        }
+        
+        .thesis-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+        
+        .thesis-content {
+            padding-left: 3rem;
+            font-size: 1.1rem;
+            max-width: 900px;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .green-section {
+            background-color: var(--green-bg);
+        }
+        
+        .black-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+        
+        .black-section .horizontal-line {
+            background-color: var(--text-light);
+        }
+        
+        .quote {
+            padding: 2rem;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -1rem;
+            left: 0;
+            color: var(--green-bg);
+        }
+        
+        .quote-attribution {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .intro-text {
+            font-size: 1.25rem;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+        
+        .figure {
+            margin: 2rem 0;
+            padding: 0 2rem;
+        }
+        
+        .figure-caption {
+            font-size: 0.9rem;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .black-section .figure-caption {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .figure h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .chart {
+            width: 100%;
+            height: 400px;
+            background-color: var(--light-bg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .video-section {
+            width: 100%;
+            background-color: #333;
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .video-label {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .video-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-light);
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 20px;
+        }
+        
+        .control-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .control-button:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .backward-button:before, .forward-button:before {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .backward-button:before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-top: 3px solid #333;
+            border-left: 3px solid #333;
+            transform: rotate(-45deg);
+            margin-left: 5px;
+        }
+        
+        .backward-button:after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-top: 3px solid #333;
+            border-left: 3px solid #333;
+            transform: rotate(-45deg);
+            position: absolute;
+            left: 12px;
+        }
+        
+        .forward-button:before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-top: 3px solid #333;
+            border-right: 3px solid #333;
+            transform: rotate(45deg);
+            margin-right: 5px;
+        }
+        
+        .forward-button:after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-top: 3px solid #333;
+            border-right: 3px solid #333;
+            transform: rotate(45deg);
+            position: absolute;
+            right: 12px;
+        }
+        
+        .backward-button:hover:before, .backward-button:hover:after {
+            border-color: #FF4700;
+            animation: moveLeft 0.5s ease infinite alternate;
+        }
+        
+        .forward-button:hover:before, .forward-button:hover:after {
+            border-color: #FF4700;
+            animation: moveRight 0.5s ease infinite alternate;
+        }
+        
+        @keyframes moveLeft {
+            0% { transform: rotate(-45deg) translateX(0); }
+            100% { transform: rotate(-45deg) translateX(-3px); }
+        }
+        
+        @keyframes moveRight {
+            0% { transform: rotate(45deg) translateX(0); }
+            100% { transform: rotate(45deg) translateX(3px); }
+        }
+        
+        .play-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 0 8px;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: #f8f8f8;
+        }
+        
+        .play-button:before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 18px solid #333;
+            position: relative;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover:before {
+            border-left-color: #FF4700;
+        }
+        
+        .play-button.playing:before {
+            content: '';
+            width: 6px;
+            height: 18px;
+            background: #333;
+            border: none;
+            position: relative;
+            left: -5px;
+            border-radius: 1px;
+            box-shadow: 10px 0 0 0 #333;
+            animation: none;
+        }
+        
+        .play-button.playing:hover:before {
+            background: #FF4700;
+            box-shadow: 10px 0 0 0 #FF4700;
+        }
+        
+        .play-button.playing:after {
+            display: none;
+        }
+        
+        .view-prototype-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #333;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .view-prototype-btn:hover {
+            background-color: #FF4700;
+            color: #fff;
+            border-color: #FF4700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,71,0,0.3);
+        }
+        
+        .intro-section {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .intro-indicator {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .intro-title {
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .intro-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            max-width: 900px;
+            margin-bottom: 1rem;
+        }
+        
+        .light-section {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+        
+        /* Footer styling */
+        .footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-title {
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .footer-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1000px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .meta-col {
+            flex: 1;
+        }
+        
+        .meta-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .thesis-title {
+                font-size: 1.8rem;
+            }
+            
+            .intro-text, .thesis-content {
+                font-size: 1rem;
+            }
+            
+            .quote {
+                font-size: 1.2rem;
+            }
+            
+            .intro-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer-meta {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-area">
+            <button class="back-button" onclick="window.location.href='index.html'">Back</button>
+        </div>
+        <div class="actions">
+            <button>↓</button>
+        </div>
+    </header>
+
+    <section class="section light-section" id="introduction">
+        <div class="intro-section">
+            <div class="intro-indicator">INTRODUCTION</div>
+            <h1 class="section-title">The way Cleveland State University Students managing their Academics & Job.</h1>
+            
+            <div class="horizontal-line"></div>
+            
+            <p class="intro-paragraph">This study conducted through design thinking approaches, Understanding the daily experiences of Cleveland State University students who try to balance Work & Academics. The goal is to Identify their challenges, struggles, faced as an International Student, who has come with many dreams, but as their path is not easy as their dreams.</p>
+            
+            <p class="intro-paragraph">This study tries to cover the real cost of life,
+            as this study does not cover any emotional struggle, as they leave their lovely mother who always cares a lot and father who sustains the wants and needs of them.</p>
+            
+            <p class="intro-paragraph"> It covers only
+            half a story on how they manage their time between academics and duty they must perform to survive, how this dual commitment impacts them mentally. I went to empathize with students to define the truth of their problems and ideated a few solutions to try to develop upon their experience.</p>
+            
+        </div>
+    </section>
+
+    <section class="section green-section" id="section1">
+        <div class="section-header">
+            <div class="section-indicator">EMPATHY PHASE</div>
+            <div class="section-dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <h1 class="section-title">The Interview</h1>
+
+        <div class="horizontal-line"></div>
+
+    
+
+        <div class="figure">
+            <div class="figure-caption">QUESTIONS</div>
+            <h2>1. Could you tell me about your academic program?</h2>
+                <h2>2. Could you tell me about your Jobs?</h2>
+                <h2>3. How many hours per week do you spend on coursework and on your job?</h2>
+                <h2>4. Walk me through a typical day in your life, like how you balance work and studies?</h2>
+                <h2>5. Are there any strategies you use to manage both work & academic.</h2>
+                <h2>6. Any resources that university helped in managing this balance?</h2>
+                <h2>7. What applications you use to manage your time.</h2>
+                <h2>8. What are the biggest challenges you faced in balancing work and academic?</h2>
+                <h2>9. Does academics affect your job duties?</h2>
+                <h2>10. Were there any things that affected your mental health and wellbeing of studies?</h2>        </div>
+    </section>
+
+    <section class="section black-section" id="section2">
+        <div class="section-header">
+            <div class="section-indicator">Outcome</div>
+            <div class="section-dots">
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <h1 class="section-title">Abbas</h1>
+
+        <div class="horizontal-line"></div>
+
+        <div class="section-content">
+           
+                <p class="question">Yeah.</p>
+                <br>
+                <p class="question">So I mean record with your on mobile record</p>
+                <p class="question">Could you tell me about your academic program and your job?</p>
+                <p class="answer">So I did masters in computer science and you could record better and later write it down, so I did masters from computer science from Cleveland State University and uh I started in the year 2023. And it took me almost eighteen months to complete my program and uh what’s what was the next question?</p>
+                <br>
+                <p class="question">And your job.</p>
+                <br>
+                <p class="answer">And I, the part time I was working was uh was in the parking services, university parking services.</p>
+                <p class="answer">I was as a call center representative handling calls of the customers who comes to the garages and assisting them and I was also and then I’ll was in different roles as well within the uh same department as especially at even tickets and collecting cash and maintaining the cash.</p>
+                <p class="answer">And then I was enforcement officer to look for it vehicles and look whether they are following the rules or not.</p>
+                <p class="answer">And uh and I and I was also research assistant for a couple of months two, three months, wear I was, you know, uh developing aso models uh in for mechanical department yeah.</p>
+                <br>
+                <p class="question">And how many hours per week do you spend on coursework and your job?</p>
+                <br>
+                <p class="answer">For the job, I used to work somewhere around ten to fifteen hours, generally the average amount of time.</p>
+                <p class="answer">I used to work per week.</p>
+                <p class="answer">And for the coursework, I used to attend all the classes so in total, I used to spend more time on the coast work then on jobs, so that’s what I could say.</p>
+                <br>
+                <p class="question">Okay Walk me tough your Typical day in your life, like how you manage work and studies. Shift in the morning or in the afternoon?</p>
+                <br>
+                <p class="answer">So generally my classes are in the afternoon, so August taking the morning or the afternoon shifts. My classes are in the evening, so I be taking the morning shift, so I used to work in the morning in study in the evening and my typical day was I’ll get I’ll you know, I’ll pack my lunch everything and leave uh in leave home, uh somewhere at 9 AM if I don’t have shift before that. Uh and stay in the university until uh the end of the day until 9 P.M.</p>
+                <p class="answer">So I’ll start my day work there and uh if I have free time go today was go to the library, study there, eat there as well as my lunch and then go to the classes, then attend the classes and go to professor office or and you know, go to what I’ve been just come back home, so that that was my usual</p>
+                <br>
+                <p class="question">OKAY does academics affected by your work duties?</p>
+                <br>
+                <p class="answer">Not really, because I used to manage it really well.</p>
+                <br>
+                <p class="question">Like what things majorly affect your mental health and well-being while studying?</p>
+                <br>
+                <p class="answer">Smiles</p>
+                <p class="answer">Yeh I mean, the thing is I have to manage everything by myself, the money, uh have to maintain my, you know, I got my day to day expenses uh have to make sure I don’t cross my budget so that I don’t go into a debt.</p>
+                <p class="answer">So that what it was the biggest uh problem.</p>
+                <p class="answer">I have to use credit card and I have to pay the bills before time</p>
+                <p class="answer">That’s all that was the biggest because I was earning uh</p>
+                <p class="answer">I was working only for 20 hrs. So there was a limited uh income coming to my uh pocket but they were but the expenses were usual.</p>
+                <p class="answer">The expenses were necessary expenses, which we cannot deny. Which were more than what I used to once. The problem being simple is, I mean, management of expenses, yeah.</p>
+                <p class="answer">What I used to manage somehow.</p>
+                <p class="answer">I was successful, not too much, a bit.</p>
+                <br>
+                <p class="question">OKAY Is there any strategies you used to manage Work and uh academics?</p>
+                <br>
+                <p class="answer">Yeah there was Strategies to follow for example,</p>
+                <br>
+                <p class="question">um like any university resources uh like applications and how you manage time?</p>
+                <br>
+                <p class="answer">I mean, I mean I do not have the university in specific applications on, but I used to complete work on my time on the same day itself</p>
+                <p class="answer">For example, if I happen to get a assignment, I try to complete the same day or the next day by Max.</p>
+                <p class="answer">So well that’s so I used to manage and sometimes, uh whenever whenever I had, you know, on work if I have some time in between I can even prepare uh prepare myself my notes and also.</p>
+                <p class="answer">That’s how I used to manage time.</p>
+                <p class="answer">So it was a bit hectic because of the time what was remaining after I work was not sufficient.</p>
+                <p class="answer">So sometimes I have to even study of work during my work on campus working hours. If I have a time.</p>
+                <br>
+                <p class="question">Okay, What is the biggest challenge you face in balancing work and academic life?</p>
+                <br>
+                <p class="answer">Of course the biggest challenge is the time because sometimes the workload is the tough it is it’s not too much, but it gets complicated.</p>
+                <br>
+                <p class="question">So sometimes it takes days, sometimes it takes weeks to complete one single assignment and and and it, you know, and it uh and it’s it’s it’s a pain.</p>
+                <p class="answer">And so sometimes it’s a headache. So but yet, uh, the key to uh solve this is, uh, take help, take help from the professors they help you.</p>
+                <p class="answer">I mean, that’s what helped me. I mean, they help you understanding what is expected uh from the output of from your assignment.</p>
+        </div>
+
+        <div class="quote">
+            <p>This [Problem Statement] , Students, particularly those who balance work and studies, face a significant challenge in
+            managing their time, academic workload and finances which is leading the way to path of stress
+            and frustration. They need an effective tool to help them organize their schedules, track academic
+            progress, manage finances, and a tool to reduce anxiety and mental stress to achieve balance and
+            wellbeing because life goes through it however we are. It’s a lie if no stress is involved in this
+            journey.</p>
+            <div class="quote-attribution">Santosh Varma Alluri</div>
+        </div>
+        
+    </section>
+
+    <div class="empathy-map-container" style="text-align: center; margin: 40px 0;">
+        <img src="empathy-map.jpg" alt="Empathy Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    </div>
+
+    <section class="section green-section" id="section3">
+        <div class="section-header">
+            <div class="section-indicator">Define</div>
+            <div class="section-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <h1 class="section-title">Point of View</h1>
+
+        <div class="horizontal-line"></div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+               
+            </div>
+            <div class="thesis-content">
+                <p>I need a way to efficiently manage my time, stay on top of my academics and keep my finances in order while also having a tool to help me with the stress and anxiety that come with these challenges, so I can maintain my wellbeing.</p>
+            </div>
+        </div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+                
+                <h2 class="thesis-title">User</h2>
+            </div>
+            <div class="thesis-content">
+                <p>Master’s student in computer science who works part time in parking services and as a research assistant.</p>
+            </div>
+        </div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+                
+                <h2 class="thesis-title">Needs</h2>
+            </div>
+            <div class="thesis-content">
+                <p>Time management (studying during breaks), academic organization (much better than blackboard), financial control to manage money carefully, and stress relief.</p>
+            </div>
+        </div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+               
+                <h2 class="thesis-title">Goal</h2>
+            </div>
+            <div class="thesis-content">
+                <p>Succeed academically and manage wellbeing despite the pressures of a job for financial support and sustenance.</p>
+            </div>
+        </div>
+        <div class="horizontal-line"></div>
+        <div class="thesis">
+            <div class="thesis-header">
+                <h1 class="section-title">How Might We</h1>
+                
+            </div>
+            
+            <div class="thesis-content">
+                <p>How might we design integrated tools that can help students efficiently manage their time, academic tasks, and finances, and also support mental stress to enhance their academic success and wellbeing?</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section black-section" id="section3">
+        <div class="section-header">
+            <div class="section-indicator">IDEATE & PROTOTYPE</div>
+            <div class="section-dots">
+                <div class="dot"></div> 
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <h1 class="section-title">Solutions for Student Success and Wellbeing</h1>
+
+        <div class="horizontal-line"></div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+                <div class="thesis-number">1</div>
+                <h2 class="thesis-title">Integrated Tool of Education</h2>
+            </div>
+            <div class="thesis-content">
+                <p>Enhance the existing course work solution like Blackboard by integrating with time management tool to study in less time and can easily tap in study mode after checking the course work without defocusing or distraction and can be a centralized hub where students can access learning content, track their progress and finances, and connect with CSU supports seamlessly, which was not available in existing solution with Blackboard.</p>
+                <a href="https://github.com/Alluri-engineer/ProClass" target="_blank" class="view-prototype-btn">View Prototype</a>
+            </div>
+        </div>
+
+        <div class="thesis">
+            <div class="thesis-header">
+                <div class="thesis-number">2</div>
+                <h2 class="thesis-title">Scientific Technique as a Tool for Stress Relief</h2>
+            </div>
+            <div class="thesis-content">
+                <p>Mental stress or anxiety reduction tool to address the emotional side and mental side effects which are faced by working students. This solution offers a Breathwork session, which is so free, use it anywhere, any time and at any location to relieve stress from work.</p>
+                <a href="https://github.com/Alluri-engineer/Last_Breath" target="_blank" class="view-prototype-btn">View Prototype</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="video-section">
+        <div class="video-label">Audio</div>
+        <div class="video-content">
+            <div class="audio-controls">
+                <div class="control-button backward-button" onclick="skipAudio(-15)"></div>
+                <div class="play-button" onclick="toggleAudio()"></div>
+                <div class="control-button forward-button" onclick="skipAudio(15)"></div>
+            </div>
+            <div>
+                <h3 class="video-title">Abbas</h3>
+                <p class="video-subtitle">Interview</p>
+            </div>
+            <audio id="abbasAudio" src="abbas.mp3" preload="auto"></audio>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">◯</div>
+        <h2 class="footer-title">Design Thinking</h2>
+        <div class="footer-meta">
+            <div class="meta-col">
+                <div class="meta-label">WRITTEN BY</div>
+                <div class="meta-value">Santosh Varma Alluri</div>
+                <div class="meta-value">Student</div>
+            </div>
+            <div class="meta-col">
+                <div class="meta-label">PUBLISHED</div>
+                <div class="meta-value">March 31</div>
+                <div class="meta-value">2025</div>
+            </div>
+            <div class="meta-col">
+                <div class="meta-label">LENGTH</div>
+                <div class="meta-value">5 Min</div>
+                <div class="meta-value">500 Words</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to handle section navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const dots = document.querySelectorAll('.dot');
+            
+            // Scroll to section functionality
+            document.querySelector('.actions button').addEventListener('click', function() {
+                window.scrollBy({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function toggleAudio() {
+            const audio = document.getElementById('abbasAudio');
+            const playButton = document.querySelector('.play-button');
+            
+            if (audio.paused) {
+                audio.play();
+                playButton.classList.add('playing');
+            } else {
+                audio.pause();
+                playButton.classList.remove('playing');
+            }
+        }
+        
+        function skipAudio(seconds) {
+            const audio = document.getElementById('abbasAudio');
+            audio.currentTime += seconds;
+            
+            // If audio was paused and we skip, start playing
+            if (audio.paused) {
+                toggleAudio();
+            }
+            
+            // Visual feedback for skip buttons
+            const buttonClass = seconds > 0 ? '.forward-button' : '.backward-button';
+            const button = document.querySelector(buttonClass);
+            button.style.transform = 'scale(1.2)';
+            
+            // Add temporary animation class
+            if (seconds > 0) {
+                button.classList.add('skipping-forward');
+                setTimeout(() => {
+                    button.classList.remove('skipping-forward');
+                }, 300);
+            } else {
+                button.classList.add('skipping-backward');
+                setTimeout(() => {
+                    button.classList.remove('skipping-backward');
+                }, 300);
+            }
+            
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 200);
+        }
+        
+        // Add event listener to update button state when audio ends
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('abbasAudio');
+            const playButton = document.querySelector('.play-button');
+            
+            audio.addEventListener('ended', function() {
+                playButton.classList.remove('playing');
+            });
+        });
+    </script>
+</body>
+</html>
